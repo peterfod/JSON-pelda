@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+
+<body>
+    <button id="as">async</button><br><br>
+    <button id="fe">fetch then</button><br><br>
+    <div id="result"></div>
+    <script>
+        async function betolt() {
+            try {
+                const valasz = await fetch("adatok.json");
+                const adat = await valasz.json(); // automatikusan JSON.parse-ol
+
+                // console.log(adat.iskola)
+                // adat.diakok.forEach(d => console.log(d.nev, d.jegy))
+                result.innerHTML = adat.iskola + '<br>'
+                adat.diakok.forEach(d => result.innerHTML += d.nev + ' ' + d.jegy + '<br>')
+            } catch (hiba) {
+                console.error("Hiba történt:", hiba)
+            }
+        }
+
+        function betolt2() {
+            fetch("adatok.json")
+                .then(valasz => valasz.json())   // 1. then: a válaszból JSON lesz
+                .then(adat => {                  // 2. then: itt már kész objektumod van
+                    console.log(adat.iskola)
+                    adat.diakok.forEach(d => console.log(d.nev, d.jegy))
+                })
+                .catch(hiba => {                 // hibakezelés
+                    console.error("Hiba történt:", hiba)
+                });
+        }
+
+        as.onclick = betolt
+        fe.onclick = betolt2
+    </script>
+</body>
+
+</html>

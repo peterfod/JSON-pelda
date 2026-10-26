@@ -1,0 +1,8 @@
+{
+  "iskola": "Petőfi Gimnázium",
+  "diakok": [
+    { "nev": "Anna", "jegy": 5 },
+    { "nev": "Béla", "jegy": 3 },
+    { "nev": "Csilla", "jegy": 4 }
+  ]
+}
